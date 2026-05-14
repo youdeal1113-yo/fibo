@@ -6,7 +6,6 @@
 <title>Fibo 支撑 · 阻力计算器</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     min-height: 100vh;
     background: #0a0a0f;
@@ -17,272 +16,80 @@
     align-items: center;
     padding-bottom: 48px;
   }
-
-  .container {
-    width: 100%;
-    max-width: 480px;
-    padding: 0 20px;
-  }
-
-  .header {
-    padding: 28px 20px 0;
-    max-width: 480px;
-    width: 100%;
-  }
-  .header-sub {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: #475569;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-  .header h1 {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-  }
-  .header h1.buy-mode {
-    background: linear-gradient(135deg, #f59e0b 0%, #10b981 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .header h1.sell-mode {
-    background: linear-gradient(135deg, #a78bfa 0%, #ef4444 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .header p {
-    font-size: 11px;
-    color: #475569;
-    margin-top: 5px;
-    letter-spacing: 0.05em;
-  }
-
-  /* Mode toggle */
-  .mode-toggle {
-    display: flex;
-    background: #0f1117;
-    border: 1px solid #1e2433;
-    border-radius: 12px;
-    padding: 4px;
-    margin-top: 16px;
-    gap: 4px;
-  }
-  .mode-btn {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 9px;
-    font-size: 13px;
-    font-weight: 700;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.03em;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .mode-btn.buy-active {
-    background: linear-gradient(135deg, #d97706, #059669);
-    color: #fff;
-  }
-  .mode-btn.sell-active {
-    background: linear-gradient(135deg, #7c3aed, #dc2626);
-    color: #fff;
-  }
-  .mode-btn.inactive {
-    background: transparent;
-    color: #475569;
-  }
-
-  /* Card */
-  .card {
-    background: #0f1117;
-    border: 1px solid #1e2433;
-    border-radius: 16px;
-    padding: 20px;
-    margin-top: 14px;
-  }
-
-  .input-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-
-  .input-group label {
-    display: block;
-    font-size: 10px;
-    color: #475569;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  input[type=number] {
-    width: 100%;
-    background: #161b27;
-    border: 1px solid #1e2433;
-    border-radius: 8px;
-    padding: 10px 12px;
-    color: #e2e8f0;
-    font-size: 16px;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.2s;
-    -webkit-appearance: none;
-  }
+  .container { width: 100%; max-width: 480px; padding: 0 20px; }
+  .header { padding: 28px 20px 0; max-width: 480px; width: 100%; }
+  .header-sub { font-size: 10px; letter-spacing: 0.2em; color: #475569; text-transform: uppercase; margin-bottom: 4px; }
+  .header h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+  .header h1.buy-mode { background: linear-gradient(135deg, #f59e0b 0%, #10b981 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .header h1.sell-mode { background: linear-gradient(135deg, #a78bfa 0%, #ef4444 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .header p { font-size: 11px; color: #475569; margin-top: 5px; letter-spacing: 0.05em; }
+  .mode-toggle { display: flex; background: #0f1117; border: 1px solid #1e2433; border-radius: 12px; padding: 4px; margin-top: 16px; gap: 4px; }
+  .mode-btn { flex: 1; padding: 10px; border: none; border-radius: 9px; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; transition: all 0.2s; letter-spacing: 0.03em; -webkit-tap-highlight-color: transparent; }
+  .mode-btn.buy-active { background: linear-gradient(135deg, #d97706, #059669); color: #fff; }
+  .mode-btn.sell-active { background: linear-gradient(135deg, #7c3aed, #dc2626); color: #fff; }
+  .mode-btn.inactive { background: transparent; color: #475569; }
+  .card { background: #0f1117; border: 1px solid #1e2433; border-radius: 16px; padding: 20px; margin-top: 14px; }
+  .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .input-group label { display: block; font-size: 10px; color: #475569; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+  input[type=number] { width: 100%; background: #161b27; border: 1px solid #1e2433; border-radius: 8px; padding: 10px 12px; color: #e2e8f0; font-size: 16px; font-family: inherit; outline: none; transition: border-color 0.2s; -webkit-appearance: none; }
   input[type=number].buy-focus:focus { border-color: #f59e0b; }
   input[type=number].sell-focus:focus { border-color: #a78bfa; }
   input#cur:focus { border-color: #2563eb; }
-
   .input-full { margin-bottom: 16px; }
-  .input-full label {
-    display: block;
-    font-size: 10px;
-    color: #475569;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .calc-btn {
-    width: 100%;
-    padding: 13px;
-    border: none;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    cursor: pointer;
-    font-family: inherit;
-    transition: opacity 0.15s, transform 0.1s;
-    -webkit-tap-highlight-color: transparent;
-  }
+  .input-full label { display: block; font-size: 10px; color: #475569; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+  .calc-btn { width: 100%; padding: 13px; border: none; border-radius: 10px; color: #fff; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; cursor: pointer; font-family: inherit; transition: opacity 0.15s, transform 0.1s; -webkit-tap-highlight-color: transparent; }
   .calc-btn.buy { background: linear-gradient(135deg, #d97706, #059669); }
   .calc-btn.sell { background: linear-gradient(135deg, #7c3aed, #dc2626); }
   .calc-btn:active { transform: scale(0.97); opacity: 0.9; }
-
-  /* Results */
   #results { display: none; margin-top: 12px; }
-
-  .zone-banner {
-    border-radius: 12px;
-    padding: 12px 16px;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  .zone-banner { border-radius: 12px; padding: 12px 16px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
   .zone-icon { font-size: 18px; }
   .zone-title { font-size: 13px; font-weight: 700; }
   .zone-sub { font-size: 11px; color: #94a3b8; margin-top: 2px; }
-
-  .ladder-card {
-    background: #0f1117;
-    border: 1px solid #1e2433;
-    border-radius: 16px;
-    padding: 18px 16px;
-    margin-bottom: 12px;
-  }
-  .ladder-title {
-    font-size: 10px;
-    color: #475569;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-  .ladder-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 14px;
-  }
+  .ladder-card { background: #0f1117; border: 1px solid #1e2433; border-radius: 16px; padding: 18px 16px; margin-bottom: 12px; }
+  .ladder-title { font-size: 10px; color: #475569; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 14px; }
+  .ladder-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
   .ladder-row:last-child { margin-bottom: 0; }
-  .ladder-label {
-    width: 72px;
-    flex-shrink: 0;
-    text-align: right;
-  }
+  .ladder-label { width: 72px; flex-shrink: 0; text-align: right; }
   .ladder-label .ratio { font-size: 10px; font-weight: 700; }
   .ladder-label .price { font-size: 11px; color: #94a3b8; }
-  .ladder-line {
-    flex: 1;
-    height: 2px;
-    border-radius: 1px;
-  }
-  .ladder-tag {
-    font-size: 9px;
-    border-radius: 4px;
-    padding: 1px 5px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
+  .ladder-line { flex: 1; height: 2px; border-radius: 1px; }
+  .ladder-tag { font-size: 9px; border-radius: 4px; padding: 1px 5px; white-space: nowrap; flex-shrink: 0; }
   .cur-tag { font-size: 9px; color: #2563eb; flex-shrink: 0; }
-
-  .level-card {
-    border-radius: 12px;
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-  }
+  .section-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin: 16px 0 10px; padding: 4px 10px; border-radius: 6px; display: inline-block; }
+  .level-card { border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
   .level-left { flex: 1; }
   .level-badge-row { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
-  .level-badge {
-    font-size: 11px;
-    font-weight: 700;
-    border-radius: 4px;
-    padding: 1px 7px;
-    letter-spacing: 0.05em;
-  }
+  .level-badge { font-size: 11px; font-weight: 700; border-radius: 4px; padding: 1px 7px; letter-spacing: 0.05em; }
   .level-name { font-size: 12px; color: #94a3b8; }
   .level-scene { font-size: 11px; color: #64748b; line-height: 1.5; }
   .level-right { text-align: right; flex-shrink: 0; }
   .level-price { font-size: 22px; font-weight: 700; line-height: 1; }
   .level-change { font-size: 10px; color: #475569; margin-top: 3px; }
-
-  .footer-note {
-    text-align: center;
-    font-size: 10px;
-    color: #334155;
-    margin-top: 8px;
-    letter-spacing: 0.08em;
-  }
-
+  .divider { border: none; border-top: 1px dashed #1e2433; margin: 14px 0; }
+  .footer-note { text-align: center; font-size: 10px; color: #334155; margin-top: 8px; letter-spacing: 0.08em; }
   .fade-in { animation: fadeUp 0.4s ease forwards; opacity: 0; }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .d1 { animation-delay: 0.05s; }
-  .d2 { animation-delay: 0.12s; }
-  .d3 { animation-delay: 0.19s; }
-  .d4 { animation-delay: 0.26s; }
-  .d5 { animation-delay: 0.33s; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .d1{animation-delay:0.05s} .d2{animation-delay:0.10s} .d3{animation-delay:0.15s}
+  .d4{animation-delay:0.20s} .d5{animation-delay:0.25s} .d6{animation-delay:0.30s}
+  .d7{animation-delay:0.35s} .d8{animation-delay:0.40s} .d9{animation-delay:0.45s}
+  .d10{animation-delay:0.50s} .d11{animation-delay:0.55s}
 </style>
 </head>
 <body>
 
-<div class="header" id="header">
+<div class="header">
   <div class="header-sub">Fibonacci · Support &amp; Resistance</div>
   <h1 id="formula" class="buy-mode">B − (B−A) × 比率</h1>
   <p id="subtitle">斐波那契回撤 · 核心支撑位</p>
 </div>
 
 <div class="container">
-
-  <!-- Mode Toggle -->
   <div class="mode-toggle">
     <button class="mode-btn buy-active" id="btn-buy" onclick="setMode('buy')">📈 抄底模式</button>
-    <button class="mode-btn inactive"   id="btn-sell" onclick="setMode('sell')">📉 逃顶模式</button>
+    <button class="mode-btn inactive" id="btn-sell" onclick="setMode('sell')">📉 逃顶模式</button>
   </div>
 
-  <!-- Input Card -->
   <div class="card">
     <div class="input-grid">
       <div class="input-group">
@@ -313,17 +120,26 @@ const BUY_RATIOS = [
   { ratio: 0.786, label: "0.786", name: "极限支撑位", color: "#ef4444", bg: "rgba(239,68,68,0.08)",   border: "rgba(239,68,68,0.25)",   scene: "震荡整理深回调，最后防线，破则止损" },
 ];
 
-const SELL_RATIOS = [
+const SELL_RETRACEMENT = [
   { ratio: 0.5,   label: "0.5",   name: "空头反手位", color: "#a78bfa", bg: "rgba(167,139,250,0.08)", border: "rgba(167,139,250,0.25)", scene: "反弹到一半，弱势股常见出货位" },
   { ratio: 0.618, label: "0.618", name: "黄金阻力位", color: "#f97316", bg: "rgba(249,115,22,0.08)",  border: "rgba(249,115,22,0.25)",  scene: "反弹最常见终点，大盘股主力减仓区" },
   { ratio: 0.786, label: "0.786", name: "极限反弹位", color: "#ef4444", bg: "rgba(239,68,68,0.08)",   border: "rgba(239,68,68,0.25)",   scene: "到这里仍未突破B点，趋势未反转，坚决离场" },
+];
+
+const SELL_EXTENSION = [
+  { ratio: 1.0,   label: "1.0",   name: "前高确认位", color: "#94a3b8", bg: "rgba(148,163,184,0.08)", border: "rgba(148,163,184,0.25)", scene: "突破前高，趋势反转确认，多头接力" },
+  { ratio: 1.272, label: "1.272", name: "第一延伸位", color: "#38bdf8", bg: "rgba(56,189,248,0.08)",  border: "rgba(56,189,248,0.25)",  scene: "突破后第一目标，保守止盈位" },
+  { ratio: 1.382, label: "1.382", name: "缓冲阻力位", color: "#67e8f9", bg: "rgba(103,232,249,0.08)", border: "rgba(103,232,249,0.25)", scene: "短线获利盘出货区，常见短暂阻力" },
+  { ratio: 1.5,   label: "1.5",   name: "心理整数位", color: "#a3e635", bg: "rgba(163,230,53,0.08)",  border: "rgba(163,230,53,0.25)",  scene: "非标准Fibo，市场心理整数关口" },
+  { ratio: 1.618, label: "1.618", name: "黄金延伸位", color: "#fbbf24", bg: "rgba(251,191,36,0.10)",  border: "rgba(251,191,36,0.30)",  scene: "最重要目标位，主力常见兑现区，强势股首选" },
+  { ratio: 2.0,   label: "2.0",   name: "翻倍延伸位", color: "#f97316", bg: "rgba(249,115,22,0.08)",  border: "rgba(249,115,22,0.25)",  scene: "涨幅翻倍，强势股第二目标" },
+  { ratio: 2.618, label: "2.618", name: "极限延伸位", color: "#ef4444", bg: "rgba(239,68,68,0.08)",   border: "rgba(239,68,68,0.25)",   scene: "妖股极限目标，到达概率低但爆发力强" },
 ];
 
 function setMode(m) {
   mode = m;
   document.getElementById('results').style.display = 'none';
   document.getElementById('results').innerHTML = '';
-
   if (m === 'buy') {
     document.getElementById('btn-buy').className  = 'mode-btn buy-active';
     document.getElementById('btn-sell').className = 'mode-btn inactive';
@@ -334,17 +150,16 @@ function setMode(m) {
     document.getElementById('label-b').textContent = 'B点 — 波段高点';
     document.getElementById('calc-btn').className  = 'calc-btn buy';
     document.getElementById('calc-btn').textContent = '计算支撑位 →';
-    document.querySelectorAll('.buy-focus').forEach(el => el.className = 'buy-focus');
   } else {
     document.getElementById('btn-buy').className  = 'mode-btn inactive';
     document.getElementById('btn-sell').className = 'mode-btn sell-active';
     document.getElementById('formula').className  = 'sell-mode';
     document.getElementById('formula').textContent = 'A + (B−A) × 比率';
-    document.getElementById('subtitle').textContent = '斐波那契反弹 · 核心阻力位';
-    document.getElementById('label-a').textContent = 'A点 — 反弹起点（阶段低）';
+    document.getElementById('subtitle').textContent = '斐波那契回撤 + 延伸 · 阻力与目标位';
+    document.getElementById('label-a').textContent = 'A点 — 反弹起点';
     document.getElementById('label-b').textContent = 'B点 — 前期高点';
     document.getElementById('calc-btn').className  = 'calc-btn sell';
-    document.getElementById('calc-btn').textContent = '计算阻力位 →';
+    document.getElementById('calc-btn').textContent = '计算阻力 + 目标位 →';
   }
 }
 
@@ -356,12 +171,22 @@ function getBuyZone(cur, levels) {
   return { text: "低于极限支撑位", sub: "已跌破0.786，谨慎，趋势可能逆转", color: "#ef4444", icon: "▼" };
 }
 
-function getSellZone(cur, levels) {
+function getSellZone(cur, retLevels, extLevels) {
   if (isNaN(cur)) return null;
-  if (cur <= levels[0]) return { text: "低于0.5阻力位", sub: "反弹力度弱，继续观望或持仓等待", color: "#a78bfa", icon: "▼" };
-  if (cur <= levels[1]) return { text: "0.5 ~ 0.618 区间", sub: "接近黄金阻力，可分批减仓", color: "#f97316", icon: "◆" };
-  if (cur <= levels[2]) return { text: "0.618 ~ 0.786 区间", sub: "强反弹区，未突破前坚决清仓", color: "#ef4444", icon: "★" };
-  return { text: "超过极限反弹位", sub: "趋势可能已反转，重新评估", color: "#10b981", icon: "▲" };
+  const r05 = retLevels[0], r618 = retLevels[1], r786 = retLevels[2];
+  const e10 = extLevels[0], e1272 = extLevels[1], e1382 = extLevels[2];
+  const e15 = extLevels[3], e1618 = extLevels[4], e20 = extLevels[5], e2618 = extLevels[6];
+  if (cur < r05)   return { text: "低于0.5阻力位", sub: "反弹力度弱，继续观望", color: "#a78bfa", icon: "▼" };
+  if (cur < r618)  return { text: "0.5 ~ 0.618 区间", sub: "接近黄金阻力，可分批减仓", color: "#f97316", icon: "◆" };
+  if (cur < r786)  return { text: "0.618 ~ 0.786 区间", sub: "强反弹区，未突破前坚决清仓", color: "#ef4444", icon: "★" };
+  if (cur < e10)   return { text: "0.786 ~ 前高区间", sub: "突破前最后压力，密切关注量能", color: "#ef4444", icon: "⚡" };
+  if (cur < e1272) return { text: "已突破前高", sub: "趋势反转确认，1.272为第一目标", color: "#94a3b8", icon: "▲" };
+  if (cur < e1382) return { text: "1.272 ~ 1.382 区间", sub: "第一目标达到，注意短线获利盘", color: "#38bdf8", icon: "▲" };
+  if (cur < e15)   return { text: "1.382 ~ 1.5 区间", sub: "强势延伸，1.618黄金目标在望", color: "#67e8f9", icon: "▲" };
+  if (cur < e1618) return { text: "1.5 ~ 1.618 区间", sub: "逼近黄金目标位，分批止盈", color: "#a3e635", icon: "▲" };
+  if (cur < e20)   return { text: "已过黄金延伸位", sub: "强势超预期，2.0为下一目标", color: "#fbbf24", icon: "🔥" };
+  if (cur < e2618) return { text: "1.618 ~ 2.0 区间", sub: "超强势，注意回调风险", color: "#f97316", icon: "🔥" };
+  return { text: "超过2.618极限位", sub: "妖股级别，随时可能剧烈回调", color: "#ef4444", icon: "🚨" };
 }
 
 function calculate() {
@@ -375,118 +200,148 @@ function calculate() {
     return;
   }
 
-  const RATIOS = mode === 'buy' ? BUY_RATIOS : SELL_RATIOS;
-  const levels = mode === 'buy'
-    ? RATIOS.map(r => bv - (bv - av) * r.ratio)
-    : RATIOS.map(r => av + (bv - av) * r.ratio);
-
-  const range = (bv - av).toFixed(2);
-  const zone = hasCur
-    ? (mode === 'buy' ? getBuyZone(cv, levels) : getSellZone(cv, levels))
-    : null;
-
+  const range = bv - av;
   let html = '';
 
-  // Zone banner
-  if (zone) {
-    html += `
-    <div class="zone-banner fade-in" style="background:${zone.color}15;border:1px solid ${zone.color}40;">
-      <div class="zone-icon" style="color:${zone.color}">${zone.icon}</div>
-      <div>
-        <div class="zone-title" style="color:${zone.color}">${zone.text}</div>
-        <div class="zone-sub">${zone.sub}</div>
-      </div>
-    </div>`;
-  }
+  if (mode === 'buy') {
+    const levels = BUY_RATIOS.map(r => bv - range * r.ratio);
+    const zone = hasCur ? getBuyZone(cv, levels) : null;
 
-  // Ladder
-  const isBuy = mode === 'buy';
-  const topPrice = isBuy ? bv : levels[2];
-  const botPrice = isBuy ? levels[2] : av;
-  const structureLabel = isBuy
-    ? `波段 $${av.toFixed(2)} → $${bv.toFixed(2)} &nbsp;涨幅 +$${range}`
-    : `反弹区间 $${av.toFixed(2)} → $${bv.toFixed(2)} &nbsp;空间 $${range}`;
+    if (zone) {
+      html += `<div class="zone-banner fade-in" style="background:${zone.color}15;border:1px solid ${zone.color}40;">
+        <div class="zone-icon" style="color:${zone.color}">${zone.icon}</div>
+        <div><div class="zone-title" style="color:${zone.color}">${zone.text}</div>
+        <div class="zone-sub">${zone.sub}</div></div></div>`;
+    }
 
-  html += `
-  <div class="ladder-card fade-in d1">
-    <div class="ladder-title">${structureLabel}</div>
-    <div>`;
-
-  // Top anchor
-  const topLabel = isBuy ? `B $${bv.toFixed(2)}` : `B(前高) $${bv.toFixed(2)}`;
-  html += `
-      <div class="ladder-row">
-        <div class="ladder-label" style="font-size:10px;color:#64748b">${topLabel}</div>
-        <div class="ladder-line" style="background:#334155;height:2px"></div>
+    // Ladder
+    html += `<div class="ladder-card fade-in d1">
+      <div class="ladder-title">波段 $${av.toFixed(2)} → $${bv.toFixed(2)} &nbsp;涨幅 +$${range.toFixed(2)}</div><div>`;
+    html += `<div class="ladder-row"><div class="ladder-label" style="font-size:10px;color:#64748b">B $${bv.toFixed(2)}</div><div class="ladder-line" style="background:#334155;height:2px"></div></div>`;
+    BUY_RATIOS.forEach((r, i) => {
+      const price = levels[i];
+      const isNow = hasCur && Math.abs(cv - price) / price < 0.015;
+      html += `<div class="ladder-row">
+        <div class="ladder-label"><div class="ratio" style="color:${r.color}">${r.label}</div><div class="price">$${price.toFixed(2)}</div></div>
+        <div class="ladder-line" style="background:linear-gradient(90deg,${r.color}70,${r.color}15);${isNow?`box-shadow:0 0 8px ${r.color}`:''}"></div>
+        ${isNow?`<div class="ladder-tag" style="color:${r.color};background:${r.color}20;border:1px solid ${r.color}40">NOW</div>`:''}
       </div>`;
-
-  // Level rows — buy shows high→low, sell shows low→high (reversed)
-  const displayRatios = isBuy ? RATIOS : [...RATIOS].reverse();
-  const displayLevels = isBuy ? levels : [...levels].reverse();
-
-  displayRatios.forEach((r, i) => {
-    const price = displayLevels[i];
-    const isNow = hasCur && Math.abs(cv - price) / price < 0.015;
-    html += `
-      <div class="ladder-row">
-        <div class="ladder-label">
-          <div class="ratio" style="color:${r.color}">${r.label}</div>
-          <div class="price">$${price.toFixed(2)}</div>
-        </div>
-        <div class="ladder-line" style="background:linear-gradient(90deg,${r.color}70,${r.color}15);${isNow ? `box-shadow:0 0 8px ${r.color}` : ''}"></div>
-        ${isNow ? `<div class="ladder-tag" style="color:${r.color};background:${r.color}20;border:1px solid ${r.color}40">NOW</div>` : ''}
-      </div>`;
-  });
-
-  // Bottom anchor
-  const botLabel = isBuy ? `A $${av.toFixed(2)}` : `A(反弹起点) $${av.toFixed(2)}`;
-  html += `
-      <div class="ladder-row">
-        <div class="ladder-label" style="font-size:10px;color:#64748b">${botLabel}</div>
-        <div class="ladder-line" style="background:#1e2433;height:1px"></div>
-      </div>`;
-
-  // Current price dashed line
-  if (hasCur) {
-    html += `
-      <div class="ladder-row">
-        <div class="ladder-label">
-          <div class="ratio" style="font-size:9px;color:#2563eb">现价</div>
-          <div class="price" style="color:#60a5fa">$${cv.toFixed(2)}</div>
-        </div>
+    });
+    if (hasCur) {
+      html += `<div class="ladder-row"><div class="ladder-label"><div class="ratio" style="font-size:9px;color:#2563eb">现价</div><div class="price" style="color:#60a5fa">$${cv.toFixed(2)}</div></div>
         <div class="ladder-line" style="height:1px;background:repeating-linear-gradient(90deg,#2563eb 0,#2563eb 4px,transparent 4px,transparent 8px)"></div>
-        <div class="cur-tag">◄ 当前</div>
-      </div>`;
-  }
+        <div class="cur-tag">◄ 当前</div></div>`;
+    }
+    html += `</div></div>`;
 
-  html += `</div></div>`;
-
-  // Level cards
-  RATIOS.forEach((r, i) => {
-    const price = levels[i];
-    const pct = ((price - av) / av * 100);
-    const changeLabel = isBuy
-      ? `距高点 −${((bv - price) / bv * 100).toFixed(1)}%`
-      : `较起点 +${pct.toFixed(1)}%`;
-    const delays = ['d2','d3','d4'];
-    html += `
-    <div class="level-card fade-in ${delays[i]}" style="background:${r.bg};border:1px solid ${r.border}">
-      <div class="level-left">
-        <div class="level-badge-row">
+    BUY_RATIOS.forEach((r, i) => {
+      const price = levels[i];
+      const drop = ((bv - price) / bv * 100).toFixed(1);
+      const delays = ['d2','d3','d4'];
+      html += `<div class="level-card fade-in ${delays[i]}" style="background:${r.bg};border:1px solid ${r.border}">
+        <div class="level-left"><div class="level-badge-row">
           <span class="level-badge" style="color:${r.color};background:${r.color}20;border:1px solid ${r.color}40">${r.label}</span>
-          <span class="level-name">${r.name}</span>
-        </div>
-        <div class="level-scene">${r.scene}</div>
-      </div>
-      <div class="level-right">
-        <div class="level-price" style="color:${r.color}">$${price.toFixed(2)}</div>
-        <div class="level-change">${changeLabel}</div>
-      </div>
-    </div>`;
-  });
+          <span class="level-name">${r.name}</span></div>
+          <div class="level-scene">${r.scene}</div></div>
+        <div class="level-right"><div class="level-price" style="color:${r.color}">$${price.toFixed(2)}</div>
+          <div class="level-change">距高点 −${drop}%</div></div></div>`;
+    });
+
+  } else {
+    // SELL MODE
+    const retLevels = SELL_RETRACEMENT.map(r => av + range * r.ratio);
+    const extLevels = SELL_EXTENSION.map(r => av + range * r.ratio);
+    const zone = hasCur ? getSellZone(cv, retLevels, extLevels) : null;
+
+    if (zone) {
+      html += `<div class="zone-banner fade-in" style="background:${zone.color}15;border:1px solid ${zone.color}40;">
+        <div class="zone-icon" style="color:${zone.color}">${zone.icon}</div>
+        <div><div class="zone-title" style="color:${zone.color}">${zone.text}</div>
+        <div class="zone-sub">${zone.sub}</div></div></div>`;
+    }
+
+    // Ladder — show all levels from top (2.618) down to A
+    const allLevels = [
+      ...SELL_EXTENSION.map((r,i) => ({ ...r, price: extLevels[i], type: 'ext' })).reverse(),
+      ...SELL_RETRACEMENT.map((r,i) => ({ ...r, price: retLevels[i], type: 'ret' })).reverse(),
+    ];
+
+    html += `<div class="ladder-card fade-in d1">
+      <div class="ladder-title">反弹区间 $${av.toFixed(2)} → $${bv.toFixed(2)} &nbsp;空间 $${range.toFixed(2)}</div><div>`;
+
+    // Extension levels in ladder
+    html += `<div style="font-size:9px;color:#38bdf8;letter-spacing:0.1em;margin-bottom:8px;padding-left:4px">▲ 延伸目标位</div>`;
+    SELL_EXTENSION.slice().reverse().forEach(r => {
+      const price = av + range * r.ratio;
+      const isNow = hasCur && Math.abs(cv - price) / price < 0.015;
+      html += `<div class="ladder-row">
+        <div class="ladder-label"><div class="ratio" style="color:${r.color}">${r.label}</div><div class="price">$${price.toFixed(2)}</div></div>
+        <div class="ladder-line" style="background:linear-gradient(90deg,${r.color}70,${r.color}15);${isNow?`box-shadow:0 0 8px ${r.color}`:''}"></div>
+        ${isNow?`<div class="ladder-tag" style="color:${r.color};background:${r.color}20;border:1px solid ${r.color}40">NOW</div>`:''}
+      </div>`;
+    });
+
+    // Divider
+    html += `<div style="border-top:1px dashed #334155;margin:10px 0 10px 0"></div>`;
+    html += `<div style="font-size:9px;color:#a78bfa;letter-spacing:0.1em;margin-bottom:8px;padding-left:4px">▼ 回撤阻力位（B点以下）</div>`;
+
+    // B point
+    html += `<div class="ladder-row"><div class="ladder-label" style="font-size:10px;color:#64748b">B(前高)<br>$${bv.toFixed(2)}</div><div class="ladder-line" style="background:#334155;height:2px"></div></div>`;
+
+    SELL_RETRACEMENT.forEach((r, i) => {
+      const price = retLevels[i];
+      const isNow = hasCur && Math.abs(cv - price) / price < 0.015;
+      html += `<div class="ladder-row">
+        <div class="ladder-label"><div class="ratio" style="color:${r.color}">${r.label}</div><div class="price">$${price.toFixed(2)}</div></div>
+        <div class="ladder-line" style="background:linear-gradient(90deg,${r.color}70,${r.color}15);${isNow?`box-shadow:0 0 8px ${r.color}`:''}"></div>
+        ${isNow?`<div class="ladder-tag" style="color:${r.color};background:${r.color}20;border:1px solid ${r.color}40">NOW</div>`:''}
+      </div>`;
+    });
+
+    // A point
+    html += `<div class="ladder-row"><div class="ladder-label" style="font-size:10px;color:#475569">A(起点)<br>$${av.toFixed(2)}</div><div class="ladder-line" style="background:#1e2433;height:1px"></div></div>`;
+
+    if (hasCur) {
+      html += `<div class="ladder-row"><div class="ladder-label"><div class="ratio" style="font-size:9px;color:#2563eb">现价</div><div class="price" style="color:#60a5fa">$${cv.toFixed(2)}</div></div>
+        <div class="ladder-line" style="height:1px;background:repeating-linear-gradient(90deg,#2563eb 0,#2563eb 4px,transparent 4px,transparent 8px)"></div>
+        <div class="cur-tag">◄ 当前</div></div>`;
+    }
+    html += `</div></div>`;
+
+    // Extension cards
+    html += `<div class="section-label fade-in d2" style="color:#38bdf8;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2)">▲ 延伸目标位</div>`;
+    SELL_EXTENSION.forEach((r, i) => {
+      const price = extLevels[i];
+      const pct = ((price - av) / av * 100).toFixed(1);
+      const delays = ['d2','d3','d4','d5','d6','d7','d8'];
+      html += `<div class="level-card fade-in ${delays[i]}" style="background:${r.bg};border:1px solid ${r.border}">
+        <div class="level-left"><div class="level-badge-row">
+          <span class="level-badge" style="color:${r.color};background:${r.color}20;border:1px solid ${r.color}40">${r.label}</span>
+          <span class="level-name">${r.name}</span></div>
+          <div class="level-scene">${r.scene}</div></div>
+        <div class="level-right"><div class="level-price" style="color:${r.color}">$${price.toFixed(2)}</div>
+          <div class="level-change">较起点 +${pct}%</div></div></div>`;
+    });
+
+    html += `<hr class="divider">`;
+
+    // Retracement cards
+    html += `<div class="section-label fade-in d9" style="color:#a78bfa;background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2)">▼ 回撤阻力位</div>`;
+    SELL_RETRACEMENT.forEach((r, i) => {
+      const price = retLevels[i];
+      const drop = ((bv - price) / bv * 100).toFixed(1);
+      const delays = ['d9','d10','d11'];
+      html += `<div class="level-card fade-in ${delays[i]}" style="background:${r.bg};border:1px solid ${r.border}">
+        <div class="level-left"><div class="level-badge-row">
+          <span class="level-badge" style="color:${r.color};background:${r.color}20;border:1px solid ${r.color}40">${r.label}</span>
+          <span class="level-name">${r.name}</span></div>
+          <div class="level-scene">${r.scene}</div></div>
+        <div class="level-right"><div class="level-price" style="color:${r.color}">$${price.toFixed(2)}</div>
+          <div class="level-change">距前高 −${drop}%</div></div></div>`;
+    });
+  }
 
   html += `<div class="footer-note">个人工具 · 不构成投资建议 · 小盘股慎用</div>`;
-
   const el = document.getElementById('results');
   el.style.display = 'block';
   el.innerHTML = html;
